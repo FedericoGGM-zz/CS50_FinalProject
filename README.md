@@ -46,6 +46,21 @@ When the user click the "Log in" button, **login** function in application.py ta
 First, we query the database searching for that username. If we dont get any result, the username dont exist and a error message is displayed.
 Then, we check password with the mentioned **check_password_hash** function. If we get false as a result, a error message is displayed.
 
+        # Ensure username was submitted
+        if not request.form.get("username"):
+            return render_template("error.html", message="Must provide username")
+
+        # Ensure password was submitted
+        elif not request.form.get("password"):
+            return render_template("error.html", message="Must provide password")
+
+        # Query database for username
+        rows = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
+
+        # Ensure username exists and password is correct
+        if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
+            return render_template("error.html", message="Check username or password")
+
 
 
 ## Sales
