@@ -39,13 +39,14 @@ In **application.py**, we import **check_password_hash** from werkzeug.
 
 **check_password_hash**: check a password against a given salted and hashed password value. In order to support unsalted legacy passwords this method supports plain text passwords, md5 and sha1 hashes (both salted and unsalted).
 Returns  True  if the password matched,  False  otherwise.
+Function declaration:
+werkzeug.security.**check_password_hash**(*pwhash, password*)
 
 When the user click the "Log in" button, **login** function in application.py takes the username and password and performs a control check.
 First, we query the database searching for that username. If we dont get any result, the username dont exist and a error message is displayed.
 Then, we check password with the mentioned **check_password_hash** function. If we get false as a result, a error message is displayed.
 
-Function declaration:
-werkzeug.security.**check_password_hash**(*pwhash, password*)
+
 
 ## Sales
 ### Underneath the hood
