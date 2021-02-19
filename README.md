@@ -1,6 +1,3 @@
-# CS50_FinalProject
-CS50 2020 Course - Final Project
-
 # Ceibapp 
 ## What is?
 Ceibapp is an small business oriented inventory managment web application. 
@@ -23,7 +20,7 @@ We will detail each of them below.
 ## Register
 Before start using Ceibapp you must create a new user account and provide a password in order to access in the future. Without an account, you wont be able to work on the app.
 ### Underneath the hood
-In application.py, we import generate_password_hash from werkzeug.
+In **application.py**, we import generate_password_hash from werkzeug.
 
 Werkzeug is a comprehensive **WSGI** web application library. It began as a simple collection of various utilities for WSGI applications and has become one of the most advanced WSGI utility libraries.
 
@@ -36,15 +33,28 @@ werkzeug.security.**generate_password_hash**(*password, method='pbkdf2:sha256', 
 
 ## Login
 Now that you have an account, provide your username and password and finally! You are welcome to begin working with Ceibapp.
+
 ### Underneath the hood
-werkzeug.security.**check_password_hash**(*pwhash, password*)
-check a password against a given salted and hashed password value. In order to support unsalted legacy passwords this method supports plain text passwords, md5 and sha1 hashes (both salted and unsalted).
+In **application.py**, we import **check_password_hash** from werkzeug.
+
+**check_password_hash**: check a password against a given salted and hashed password value. In order to support unsalted legacy passwords this method supports plain text passwords, md5 and sha1 hashes (both salted and unsalted).
 Returns  True  if the password matched,  False  otherwise.
+
+When the user click the "Log in" button, **login** function in application.py takes the username and password and performs a control check.
+First, we query the database searching for that username. If we dont get any result, the username dont exist and a error message is displayed.
+Then, we check password with the mentioned **check_password_hash** function. If we get false as a result, a error message is displayed.
+
+Function declaration:
+werkzeug.security.**check_password_hash**(*pwhash, password*)
+
 ## Sales
 ### Underneath the hood
+
 ## Inventory
 ### Underneath the hood
+
 ## Movements
 ### Underneath the hood
+
 ## Record
 ### Underneath the hood
