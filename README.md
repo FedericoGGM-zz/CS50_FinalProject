@@ -1,3 +1,4 @@
+
 # Ceibapp 
 ## What is?
 Ceibapp is an small business oriented inventory managment web application. 
@@ -195,11 +196,15 @@ For the changing color rows feature a javascript code is used. It checks every r
             }
         </script>
     
+## Record
+On the day-to-day activities, the materials inventory can be modified or affected by many ways. So in order to keep a faithful control the user must register every possible stage. 
+In this factory, there are four cases that interact with the inventory.
+**purchase**: when the user make a purchase of an specific material to replenish it stock.
+**milestone**: the user can record a milestone right after a personal inventory control in the factory in order to use it as a reference in the future.
+**adjust**: suppose the user performs an inventory control and realizes that some material quantity differs from what is displayed in the app. For this case, with adjust the client can correct this error.
+**supplier**: With this option the user can record some cases where a furniture model has a material wich must be delivered to a supplier for a special work.  Even if the material it is not included in the inventory list, by selecting "-" in "inventory item" field a new input field will popup so the user can describe the special case.
 
-
-
-## Movements
 ### Underneath the hood
 
-## Record
+## Movements
 ### Underneath the hood
