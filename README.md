@@ -39,6 +39,7 @@ In **application.py**, we import **check_password_hash** from werkzeug.
 
 **check_password_hash**: check a password against a given salted and hashed password value. In order to support unsalted legacy passwords this method supports plain text passwords, md5 and sha1 hashes (both salted and unsalted).
 Returns  True  if the password matched,  False  otherwise.
+
 Function declaration:
 werkzeug.security.**check_password_hash**(*pwhash, password*)
 
@@ -64,7 +65,40 @@ Then, we check password with the mentioned **check_password_hash** function. If 
 
 
 ## Sales
+  
+With this function, you can record each sale made while detailing important data such as: furniture model, customer name, units sold and transaction date. 
+In addition, when registering a sale, the app will discount each component of said furniture from the materials in stock. 
+You must complete each form field in order to complete the registering. If any field is empty, a error message will be displayed.
+
 ### Underneath the hood
+Accesing to ***index.html*** via GET request, renders a page where the user can select every furniture model manufactured. This feature is achieved using ***HTML datalist tag*** so the user can eather select the desired model by searching it trough the list or just type some keywords in order to reduce the list lenght.
+
+                  <form action="/" method="post">
+                    <div class="form-group">
+                        <label for="model1">Choose furniture model</label>
+                        <input id="model1" type="text" name="model" list="exampleList" autocomplete="off" autofocus class="form-control">
+                        <datalist id="exampleList">
+                            {% for mod in models %}
+                            <option value="{{ mod.model }}">{{ mod.model }}</option>
+                            {% endfor%}
+                        </datalist>
+                    </div>
+In **application.py** the furniture models list is queried from database´s ***furniture table*** and passed to ***index.html*** by Flasks method **render_template()**. 
+
+        else:    
+            models = db.execute("SELECT * FROM furniture")
+        return render_template("index.html", models=models)
+ 
+ By the other hand, once the user submit the completed forms it generates a POST request method and all this information is stored as variables in **application.py**.
+ 
+
+        model = request.form.get("model")
+        client = request.form.get("client")
+        sales = request.form.get("sales")
+        date = request.form.get("date")
+        clientType = request.form.get("clientType")
+        descript = request.form.get("descript")
+        meas = request.form.get("meas")
 
 ## Inventory
 ### Underneath the hood
