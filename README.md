@@ -166,16 +166,14 @@ In ***stock.html***, we apply Jinja syntax to display all the inventory material
 	</tbody>
     </table>
 
-For the changing color rows feature a javascript code is used. It checks every row value with the ***getElementById()*** method and with an if statement control it change the backgroundColor property.
+For the changing color rows feature a javascript code is used. It checks every row value with the ***getElementById()*** method and with an if statement control it change the ***backgroundColor*** property.
         
 	<script>
             // Get total number of rows in table
             var x = document.getElementById("myTable").rows.length;
             var i;
-
             // Iterate every row
             for (i = 1; i < x; i++) {
-
                 // Get Qty cell as object
                 var c = document.getElementById("myTable").rows[i].cells[1];
                 // Get qty cell value as text
@@ -186,17 +184,13 @@ For the changing color rows feature a javascript code is used. It checks every r
                 var floatQty = parseFloat(cellQty);
                 // Convert Alert cell value into float
                 var floatAlert = parseFloat(cellAlert);
-
                 // Paint yellow every value minor than alert value
                 if (floatQty <= floatAlert && floatQty >= 0) {
                     c.style.backgroundColor = "yellow";
-
                 }
-
                 // Paint red every value minor than zero
                 if (floatQty < 0) {
                     c.style.backgroundColor = "lightcoral";
-
                 }
             }
         </script>
