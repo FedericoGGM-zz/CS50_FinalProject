@@ -205,6 +205,77 @@ In this factory, there are four cases that interact with the inventory.
 - **supplier**: With this option the user can record some cases where a furniture model has a material wich must be delivered to a supplier for a special work.  Even if the material it is not included in the inventory list, by selecting "-" in "inventory item" field a new input field will popup so the user can describe the special case.
 
 ### Underneath the hood
+In **application.py**, when accesing **register()** function via POST method it will render ***register.html*** passing to it an options list and DB stock table:
+
+        if request.method == "GET":
+	        option = ["Purchase","Milestone","Adjust","Supplier"]
+	        stock = db.execute("SELECT name FROM stock")
+        return render_template("register.html",stock=stock,option=option)
+In ***register.html*** the user can select between four handling options and the complete stock list of materials. There is a special case when "supplier" option and "-" as inventory item are selected, this will show a new input field. As we can appreciate next, this feature is designed by javascript code:
+
+            <script>
+            function GFG_Fun() {
+                var x = document.getElementById("mySelect").selectedIndex;
+                var y = document.getElementById("mySelect").options;
+                var b = document.getElementById("motiveSelect").selectedIndex;
+                var c = document.getElementById("motiveSelect").options;
+                var d = document.getElementById("GFG_DOWN")
+                // Create node child for new input text box
+                var ID = document.createElement("input");
+                ID.setAttribute("type", "text");
+                ID.setAttribute("name", "supItem");
+                ID.setAttribute("placeholder", "Item");
+                ID.setAttribute("class", "form-control");
+
+                if (document.getElementById("mySelect").disabled && c[b].text !== "Supplier") {
+                    document.getElementById("mySelect").disabled = false;
+                    d.removeChild(d.childNodes[0]);
+                }
+
+                if (y[x].text === "-" && c[b].text === "Supplier") {
+                    document.getElementById("mySelect").disabled = true;
+                    d.appendChild(ID);
+                }
+            }
+        </script>
+So when the combination of both fields is true, a new input field is created by **setAttribute()** method. In the other way, if the user selects other motive option the last field created is removed.
+
+Once the information is submited, the actual transaction is recorded in **DB regStock table** via POST method in **register()** function.
+
+        # If MILESTONE selected, just insert data to regStock
+        if motive == "Milestone":
+
+            if user_qty != 0:
+                return render_template("error.html", message="By selecting Milestone, qty must be 0 (zero)")
+            if item != "-":
+                return render_template("error.html", message="By selecting Milestone, item must be -")
+            # Insert MILESTONE user data
+            db.execute("INSERT INTO regStock (motive,destination,item,qty,date) VALUES (?,?,?,?,?)", motive, destination, item, user_qty, date)
+            return redirect("/movements")
+
+        # Else, with any other selection substract qty from stock
+        else:
+            # If not a special material, do this
+            if item != None:
+                # Select item qty in stock
+                stock = db.execute("SELECT qty FROM stock WHERE name = ?", item)
+                # Default value if Adjust is chosen
+                updateVal = user_qty
+                # If this option, do an addition
+                if motive == "Purchase":
+                    updateVal = stock[0]["qty"] + user_qty
+                # Else if this option, do a substraction
+                elif motive == "Supplier":
+                    updateVal = stock[0]["qty"] - user_qty
+                # Update stock qty value
+                db.execute("UPDATE stock SET qty = ? WHERE name = ?", updateVal, item)
+                # Insert inventory movement in regStock
+                db.execute("INSERT INTO regStock (motive,destination,item,qty,date) VALUES (?,?,?,?,?)", motive, destination, item, user_qty, date)
+
+            # Else just insert special item
+            else:
+                # Insert inventory movement in regStock
+                db.execute("INSERT INTO regStock (motive,destination,item,qty,date) VALUES (?,?,?,?,?)", motive, destination, item2, user_qty, date)
 
 ## Movements
 ### Underneath the hood
