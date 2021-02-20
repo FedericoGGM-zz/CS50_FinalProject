@@ -129,7 +129,80 @@ With this variables we can query the selected furniture model from ***DB furnitu
 
 Finally, at the end of the function we are redirected to ***confirm.html*** where ***DB sell table*** is displayed.
 ## Inventory
+In this special feature, the user can check the actual state of the materials inventory. The information is displayed in a three column table: *name of material, quantity and unit*.
+In order to prevent inventory shortage, each material has an specific "alert value" predefined in the database. So, if after a sale registering discount the new value is minor than the alert, the actual row will change it color to yellow.
+By the other hand, if the new value after a sale discount is minor to zero the row color will change to red.
+
 ### Underneath the hood
+In **application.py**, ***stock()*** function query the ***DB stock table*** and pass it to ***stock.html*** by Flasks method **render_template()**. 
+
+	    @app.route("/stock", methods=["GET", "POST"])
+		@login_required
+		def stock():
+
+	    if request.method == "GET":
+		stock = db.execute("SELECT * FROM stock")
+		return render_template("stock.html",stock=stock)
+  
+In ***stock.html***, we apply Jinja syntax to display all the inventory materials as a HTML table.
+  
+	<table id="myTable" class="table table-hover table-bordered table-striped">
+	<thead class="thead-dark">
+	    <tr>
+		<th>Name</th>
+		<th>Quantity</th>
+		<th>Unit</th>
+	    </tr>
+	</thead>
+	<tbody>
+	    {% for row in stock%}
+	    <tr id="myRow">
+		<td>{{ row.name }}</td>
+		<td id="qtyCell">{{ row.qty }}</td>
+		<td>{{ row.unit }}</td>
+		<td style="display:none;">{{ row.alert }}</td>
+	    </tr>
+	    {% endfor %}
+	</tbody>
+    </table>
+
+For the changing color rows feature a javascript code is used. It checks every row value with the ***getElementById()*** method and with an if statement control it change the backgroundColor property.
+        
+	<script>
+            // Get total number of rows in table
+            var x = document.getElementById("myTable").rows.length;
+            var i;
+
+            // Iterate every row
+            for (i = 1; i < x; i++) {
+
+                // Get Qty cell as object
+                var c = document.getElementById("myTable").rows[i].cells[1];
+                // Get qty cell value as text
+                var cellQty = document.getElementById("myTable").rows[i].cells[1].innerText;
+                // Get alert cell value as text
+                var cellAlert = document.getElementById("myTable").rows[i].cells[3].innerText;
+                // Convert Qty cell value into float
+                var floatQty = parseFloat(cellQty);
+                // Convert Alert cell value into float
+                var floatAlert = parseFloat(cellAlert);
+
+                // Paint yellow every value minor than alert value
+                if (floatQty <= floatAlert && floatQty >= 0) {
+                    c.style.backgroundColor = "yellow";
+
+                }
+
+                // Paint red every value minor than zero
+                if (floatQty < 0) {
+                    c.style.backgroundColor = "lightcoral";
+
+                }
+            }
+        </script>
+    
+
+
 
 ## Movements
 ### Underneath the hood
