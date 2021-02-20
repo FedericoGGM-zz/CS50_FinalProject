@@ -278,4 +278,28 @@ Once the information is submited, the actual transaction is recorded in **DB reg
                 db.execute("INSERT INTO regStock (motive,destination,item,qty,date) VALUES (?,?,?,?,?)", motive, destination, item2, user_qty, date)
 
 ## Movements
+Here the user can see all the inventory movements loaded by **record** feature. It is possible to filter the table results by selecting one the possible options and clicking the filter button.
 ### Underneath the hood
+In **application.py,** **movements()** function will display all the ***DB regStock table*** while accessing via GET method.
+In the other hand, by accessing via POST method, it will query just the rows wich corresponds to the selected motive option.
+
+    @app.route("/movements", methods=["GET", "POST"])
+	@login_required
+	def movements():
+
+	    option = ["Sale","Purchase","Milestone","Adjust","Supplier"]
+    
+	    if request.method == "POST":
+        
+	        # Get user data from request form
+	        motive = request.form.get("motive")
+        
+	        stock = db.execute("SELECT * FROM regStock WHERE motive = ?", motive)
+        
+	        return render_template("movements.html",stock=stock,option=option)
+     
+	    if request.method == "GET":
+        
+	        stock = db.execute("SELECT * FROM regStock")
+
+	        return render_template("movements.html",stock=stock,option=option)
