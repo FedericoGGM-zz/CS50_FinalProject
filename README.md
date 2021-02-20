@@ -109,6 +109,25 @@ With this variables we can query the selected furniture model from ***DB furnitu
 
         return render_template("sell.html", fabrication=fabrication,furniture=furniture,client=client,sales=sales,date=date,clientType=clientType,descript=descript,meas=meas)
 
+***sell.html*** is an intermediate page where all the sale data is shown in two tables so the user can check if everything is ok. When clicking the submit button,  **sell()** function performs an update of ***DB tables stock, regStock and sell***. 
+
+        # Select furniture components
+        id_model = db.execute("SELECT id FROM furniture WHERE model = ?", model)
+        fabrication = db.execute("SELECT supply_id, qty, unit FROM fabrication WHERE model_id = ?", id_model[0]["id"])
+
+        for row in fabrication:
+            row["sales"] = row["qty"] * sales
+            stock = db.execute("SELECT name,qty FROM stock WHERE id = ?", row["supply_id"])
+            discVal = stock[0]["qty"] - row["sales"]
+            # Update stock qty value
+            db.execute("UPDATE stock SET qty = ? WHERE id = ?", discVal, row["supply_id"])
+            # Update regStock table with new sale
+            db.execute("INSERT INTO regStock (motive,destination,item,qty,date) VALUES (?,?,?,?,?)", motive, client, stock[0]["name"], row["sales"],date)
+
+        db.execute("INSERT INTO sell (client,clientType,model,sell_qty,date,descript,meas) VALUES (?,?,?,?,?,?,?)", client, clientType, model, sales, date, descript, meas)
+        return redirect("/confirm")
+
+Finally, at the end of the function we are redirected to ***confirm.html*** where ***DB sell table*** is displayed.
 ## Inventory
 ### Underneath the hood
 
