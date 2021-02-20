@@ -99,6 +99,15 @@ In **application.py** the furniture models list is queried from database´s ***f
         clientType = request.form.get("clientType")
         descript = request.form.get("descript")
         meas = request.form.get("meas")
+With this variables we can query the selected furniture model from ***DB furniture table*** , the manufacturing components from ***DB fabrication table*** and pass this information to ***sell.html***.
+
+        furniture = db.execute("SELECT id,model FROM furniture WHERE model = ?", model)
+        fabrication = db.execute("SELECT name, fabrication.qty, fabrication.unit FROM fabrication INNER JOIN stock on stock.id = fabrication.supply_id WHERE model_id = ?", furniture[0]['id'])
+
+        for row in fabrication:
+            row["sales"] = row["qty"] * sales
+
+        return render_template("sell.html", fabrication=fabrication,furniture=furniture,client=client,sales=sales,date=date,clientType=clientType,descript=descript,meas=meas)
 
 ## Inventory
 ### Underneath the hood
