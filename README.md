@@ -18,10 +18,10 @@ The main goal for this final step was to apply as many concepts learned trough t
 # Using the app
 This application has several functions conceived to facilitate repetitive daily tasks and allows you to keep track of: furniture sales, material purchases and other inventory movements.
 Towards run Ceibapp, follow these steps:
-1. Download finalProject folder from this [repository](https://github.com/FedericoGGM/CS50_FinalProject).
+1. Download project folder from this [repository](https://github.com/FedericoGGM/CS50_FinalProject).
 2. Go to [CS50 ide](https://ide.cs50.io/). Click on Log in.
 3. Execute `cd ~` (or simply cd with no arguments) to ensure that you’re in your home directory.
-4. Drag and drop finalProject folder on home directory.
+4. Drag and drop project folder on home directory.
 5. Execute `cd project` to change into that directory.
 6. Start Flask’s built-in web server: `$ Flask run`.
 7. Visit the URL outputted by flask to see Ceibapp in action. 
