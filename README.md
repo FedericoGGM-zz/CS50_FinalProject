@@ -6,7 +6,7 @@ The name cames from one of my favourite trees, *Ceiba Speciosa*, a beautiful loc
 ## Why?
 Ceibapp was designed as a solution for a local furniture factory which despite a long tradition in the business it didnt have a digital tool for managing their sales and inventory materials.
 ## How?
-Ceibapp was developed as a final project for the **CS50's Introduction to Computer Science** course. [https://learning.edx.org/course/course-v1:HarvardX+CS50+X/home]
+Ceibapp was developed as a final project for the [**CS50's Introduction to Computer Science**](https://learning.edx.org/course/course-v1:HarvardX+CS50+X/home) course. 
 The main goal for this final step was to apply as many concepts learned trough the course as possible, such as:
 
 	 - CS50 ide: software development, debbuging, server running.
@@ -17,6 +17,16 @@ The main goal for this final step was to apply as many concepts learned trough t
 	 - Javascript: special features manipulating the DOM.
 # Using the app
 This application has several functions conceived to facilitate repetitive daily tasks and allows you to keep track of: furniture sales, material purchases and other inventory movements.
+Towards run Ceibapp, follow these next steps:
+1. Download finalProject folder from this [repository](https://github.com/FedericoGGM/CS50_FinalProject).
+2. Go to [CS50 ide](https://ide.cs50.io/). Click on Log in.
+3. Execute `cd ~` (or simply cd with no arguments) to ensure that you’re in your home directory.
+4. Drag and drop finalProject folder on home directory.
+5. Execute `cd finalProject` to change into that directory.
+6. Start Flask’s built-in web server:
+$ Flask run
+
+
 We will detail each of them below.
 ## Register
 Before start using Ceibapp you must create a new user account and provide a password in order to access in the future. Without an account, you wont be able to work on the app.
