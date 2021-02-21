@@ -24,7 +24,7 @@ Towards run Ceibapp, follow these steps:
 4. Drag and drop finalProject folder on home directory.
 5. Execute `cd finalProject` to change into that directory.
 6. Start Flask’s built-in web server:
-$ Flask run
+`$ Flask run`
 
 
 We will detail each of them below.
