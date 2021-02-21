@@ -17,7 +17,7 @@ The main goal for this final step was to apply as many concepts learned trough t
 	 - Javascript: special features manipulating the DOM.
 # Using the app
 This application has several functions conceived to facilitate repetitive daily tasks and allows you to keep track of: furniture sales, material purchases and other inventory movements.
-Towards run Ceibapp, follow these next steps:
+Towards run Ceibapp, follow these steps:
 1. Download finalProject folder from this [repository](https://github.com/FedericoGGM/CS50_FinalProject).
 2. Go to [CS50 ide](https://ide.cs50.io/). Click on Log in.
 3. Execute `cd ~` (or simply cd with no arguments) to ensure that you’re in your home directory.
