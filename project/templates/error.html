@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block title %}
+	Error MSG
+{% endblock %}
+
+{% block main %}
+        <div class="container">
+            <div class="section">
+                <h2>Something went wrong:</h2><br>
+                <h3> {{ message }}! </h3><br>
+                <a class="btn btn-dark btn-lg" href="/" role="button">Return</a>
+            </div>
+        </div>
+        
+{% endblock %}
