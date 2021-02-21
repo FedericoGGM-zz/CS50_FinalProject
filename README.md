@@ -1,12 +1,12 @@
-
 # Ceibapp 
-## What is?
+#### Video Demo: <URL HERE>
+#### Description:
 Ceibapp is an small business oriented inventory managment web application. 
-The name cames from one of my favourite trees, *Ceiba Speciosa*, a beautiful local specimen from Argentina.
-## Why?
+The name cames from one of my favourite trees, *Ceiba Speciosa*, a stunning local specimen from Argentina.
+### Why?
 Ceibapp was designed as a solution for a local furniture factory which despite a long tradition in the business it didnt have a digital tool for managing their sales and inventory materials.
-## How?
-Ceibapp was developed as a final project for the [**CS50's Introduction to Computer Science**](https://learning.edx.org/course/course-v1:HarvardX+CS50+X/home) course. 
+
+Also, Ceibapp was developed as a final project for the [**CS50's Introduction to Computer Science**](https://learning.edx.org/course/course-v1:HarvardX+CS50+X/home) course. 
 The main goal for this final step was to apply as many concepts learned trough the course as possible, such as:
 
 	 - CS50 ide: software development, debbuging, server running.
@@ -22,9 +22,9 @@ Towards run Ceibapp, follow these steps:
 2. Go to [CS50 ide](https://ide.cs50.io/). Click on Log in.
 3. Execute `cd ~` (or simply cd with no arguments) to ensure that you’re in your home directory.
 4. Drag and drop finalProject folder on home directory.
-5. Execute `cd finalProject` to change into that directory.
+5. Execute `cd project` to change into that directory.
 6. Start Flask’s built-in web server: `$ Flask run`.
-7. Visit the URL outputted by flask to see the Ceibapp in action. 
+7. Visit the URL outputted by flask to see Ceibapp in action. 
 
 
 We will detail each feature below.
