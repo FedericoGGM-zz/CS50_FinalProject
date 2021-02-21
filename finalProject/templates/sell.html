@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Sales Confirmation
+{% endblock %}
+
+{% block main %}
+        <div class="container">
+            <div class="section">
+                <h2>Sale Registration</h2>
+                <table class="table table-hover table-bordered table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Client</th>
+                            <th>Type</th>
+                            <th>Model</th>
+                            <th>Description</th>
+                            <th>Measurements</th>
+                            <th>Sales Qty</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ client }}</td>
+                            <td>{{ clientType }}</td>
+                            {% for row in furniture %}
+                            <td>{{ row.model }}</td>
+                            {% endfor %}
+                            <td>{{ descript }}</td>
+                            <td>{{ meas }}</td>
+                            <td>{{ sales }}</td>
+                            <td>{{ date }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <form action="/sell" method="post">
+                    <input type="hidden"  name="client" value="{{ client }}">
+                    <input type="hidden" name="clientType" value="{{ clientType }}">
+                    {% for row in furniture %}
+                    <input type="hidden"  name="model" value="{{ row.model }}">
+                    {% endfor %}
+                    <input type="hidden"  name="descript"  value="{{ descript }}">
+                    <input type="hidden"  name="meas"  value="{{ meas }}">
+                    <input type="hidden"  name="sales"  value="{{ sales }}">
+                    <input type="hidden"  name="date"   value="{{ date }}">
+                    <button class="btn btn-dark" type="submit">Submit</button>
+                </form>
+            </div>
+            <div class="section">
+                {% for row in furniture %}
+                <h2> {{ row.model }} - Bill of materials</h2>
+                {% endfor %}
+                <table class="table table-hover table-bordered table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Supply</th>
+                            <th>Unit Qty</th>
+                            <th>Total Qty</th>
+                            <th>Unit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in fabrication %}
+                            <tr>
+                                <td>{{ row.name }}</td>
+                                <td>{{ row.qty }}</td>
+                                <td>{{ row.sales }}</td>
+                                <td>{{ row.unit }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+{% endblock %}
