@@ -1,13 +1,13 @@
 # Ceibapp 
 #### Video Demo: <URL HERE>
 #### Description:
-Ceibapp is an small business oriented inventory managment web application. 
+Ceibapp is an small business oriented inventory management web application. 
 The name cames from one of my favourite trees, *Ceiba Speciosa*, a stunning local specimen from Argentina.
 ### Why?
-Ceibapp was designed as a solution for a local furniture factory which despite a long tradition in the business it didnt have a digital tool for managing their sales and inventory materials.
+Ceibapp was designed as a solution for a local furniture factory which despite a long tradition in the business it didn´t have a digital tool for managing their sales and inventory materials.
 
 Also, Ceibapp was developed as a final project for the [**CS50's Introduction to Computer Science**](https://learning.edx.org/course/course-v1:HarvardX+CS50+X/home) course. 
-The main goal for this final step was to apply as many concepts learned trough the course as possible, such as:
+The main goal for this final step was to apply as many concepts learned through the course as possible, such as:
 
 	 - CS50 ide: software development, debbuging, server running.
 	 - Flask, jinja: web application development.
@@ -82,7 +82,7 @@ In addition, when registering a sale, the app will discount each component of sa
 You must complete each form field in order to complete the registering. If any field is empty, a error message will be displayed.
 
 ### Underneath the hood
-Accesing to ***index.html*** via GET request, renders a page where the user can select every furniture model manufactured. This feature is achieved using ***HTML datalist tag*** so the user can eather select the desired model by searching it trough the list or just type some keywords in order to reduce the list lenght.
+Accesing to ***index.html*** via GET request, renders a page where the user can select every furniture model manufactured. This feature is achieved using ***HTML datalist tag*** so the user can eather select the desired model by searching it through the list or just type some keywords in order to reduce the list lenght.
 
                   <form action="/" method="post">
                     <div class="form-group">
